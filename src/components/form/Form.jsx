@@ -7,7 +7,14 @@ import {
   StyledErrorMessage,
   StyledInputContainer,
   StyledQueryContainer,
-  StyledInput
+  StyledInput,
+  StyledQueryOptions,
+  StyledQueryLabel,
+  StyledQueryCheck,
+  StyledTextarea,
+  StyledConsentCheck,
+  StyledConsentLabel,
+  StyledSubmitButton
 } from './form.styled';
 
 const Form = () => {
@@ -18,6 +25,11 @@ const Form = () => {
   } = useForm();
   console.log(errors);
 
+  let hasError=null
+
+  console.log(hasError);
+  
+
   return (
     <StyledFormContainer onSubmit={handleSubmit()}>
       <StyledInputContainer>
@@ -26,6 +38,7 @@ const Form = () => {
             First Name <StyledAsterisk>*</StyledAsterisk>
           </StyledLabel>
           <StyledInput
+            $hasError={errors?.firstName}
             type='text'
             {...register('firstName', FORM_VALIDATION.NAME)}
           />
@@ -38,6 +51,7 @@ const Form = () => {
           </StyledLabel>
           <StyledInput
             type='text'
+            $hasError={errors?.lastName}
             {...register('lastName', FORM_VALIDATION.LASTNAME)}
           />
           <StyledErrorMessage>{errors.lastName?.message}</StyledErrorMessage>
@@ -45,9 +59,10 @@ const Form = () => {
       </StyledInputContainer>
 
       <StyledInputContainer>
-        <StyledLabel htmlFor='email'>Email Adress *</StyledLabel>
+        <StyledLabel htmlFor='email'>Email Adress <StyledAsterisk>*</StyledAsterisk></StyledLabel>
         <StyledInput
           type='text'
+          $hasError={errors?.email}
           {...register('email', FORM_VALIDATION.EMAIL)}
         />
         <StyledErrorMessage>{errors?.email?.message}</StyledErrorMessage>
@@ -57,25 +72,29 @@ const Form = () => {
         <StyledLabel>
           Query Type <StyledAsterisk>*</StyledAsterisk>
         </StyledLabel>
-        <div>
-          <StyledInput
+
+        <StyledQueryOptions>
+          <StyledQueryCheck
             type='radio'
             id='generalEnquiry'
             value={'generalEnquiry'}
             name='queryType'
           />
-          <StyledLabel htmlFor='generalEnquiry'>General Enquiry</StyledLabel>
-        </div>
-        <div>
-          <StyledInput
+          <StyledQueryLabel htmlFor='generalEnquiry'>General Enquiry</StyledQueryLabel>
+      </StyledQueryOptions>
+      
+      <StyledQueryOptions>
+          <StyledQueryCheck
             type='radio'
             defaultChecked
             id='supportRequest'
             value={'supportRequest'}
             name='queryType'
           />
-          <StyledLabel htmlFor='supportRequest'>Support Request</StyledLabel>
-        </div>
+          <StyledQueryLabel htmlFor='supportRequest'>Support Request</StyledQueryLabel>
+        </StyledQueryOptions>
+        
+
         <StyledErrorMessage>{errors?.queryType?.message}</StyledErrorMessage>
       </StyledQueryContainer>
 
@@ -83,26 +102,28 @@ const Form = () => {
         <StyledLabel htmlFor='message'>
           Message <StyledAsterisk>*</StyledAsterisk>
         </StyledLabel>
-        <textarea
+        <StyledTextarea
           type='input'
           id='message'
+          $hasError={errors?.message}
           {...register('message', FORM_VALIDATION.MESSAGE)}
         />
         <StyledErrorMessage>{errors?.message?.message}</StyledErrorMessage>
       </StyledInputContainer>
+
       <div>
-        <StyledInput
+        <StyledConsentCheck
           type='checkbox'
           id='contacted'
           {...register('contacted', FORM_VALIDATION.CONTACTED)}
         />
-        <StyledLabel htmlFor='contacted'>
+        <StyledConsentLabel htmlFor='contacted'>
           I consent to being contacted by the team{' '}
           <StyledAsterisk>*</StyledAsterisk>
-        </StyledLabel>
+        </StyledConsentLabel>
         <StyledErrorMessage>{errors?.contacted?.message}</StyledErrorMessage>
       </div>
-      <StyledInput type='submit' />
+      <StyledSubmitButton type='submit' />
     </StyledFormContainer>
   );
 };

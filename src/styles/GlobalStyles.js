@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
 
     *,
     *::after,
@@ -31,6 +31,18 @@ export const GlobalStyles = createGlobalStyle`
     body {
     margin: 3.125rem;
     font-family: sans-serif;
+    background-color: #E0F1E8;
+    display: inline;
     }
 
 `;
+
+const StyledContainer = styled.div`
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    width: 343px;
+    margin-inline: auto;
+`
+
+export {GlobalStyles, StyledContainer}

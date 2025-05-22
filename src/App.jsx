@@ -1,13 +1,14 @@
 import Form from './components/form/Form';
-import { GlobalStyles } from './styles/GlobalStyles';
+import { StyledTitle } from './components/title/title.styled';
+import { GlobalStyles, StyledContainer } from './styles/GlobalStyles';
 
 const App = () => {
   return (
-    <div>
+    <StyledContainer>
       <GlobalStyles />
-      <h1>Contact us</h1>
+      <StyledTitle>Contact us</StyledTitle>
       <Form />
-    </div>
+    </StyledContainer>
   );
 };
 
